@@ -1,0 +1,173 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Roboter from '../components/Roboter.astro';
+import Todo from '../components/Todo.astro';
+import Aufruf from '../components/Aufruf.astro';
+import Beispiel from '../components/Beispiel.astro';
+import Formular from '../components/Formular.astro';
+import kunde from '../data/kunde.json';
+
+const {
+  firma,
+  start,
+  roboter,
+  leistungen,
+  aufrufLeistungen,
+  einsatzgebiete,
+  haltung,
+  referenzen,
+  aufrufReferenzen,
+  schnittstellen,
+  ueberUns,
+  kontakt,
+  formular,
+} = kunde;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Basis>
+  <section class="start">
+    <div class="rahmen">
+      <h1>{start.ueberschrift}</h1>
+      <p>{start.text}</p>
+      <div class="knopfreihe">
+        <a class="knopf" href="#kontakt">{start.knopfHaupt}</a>
+        <a class="knopf knopf--rand" href="#leistungen">{start.knopfNeben}</a>
+      </div>
+      <Todo text={start.todo} />
+    </div>
+  </section>
+
+  <Roboter
+    hinweis={roboter.hinweis}
+    nachricht={roboter.nachricht}
+    linkText={roboter.linkText}
+    linkZiel="#kontakt"
+  />
+  {roboter.todo && <div class="rahmen"><Todo text={roboter.todo} /></div>}
+
+  <section class="abschnitt" id="leistungen">
+    <div class="rahmen">
+      <h2>{leistungen.ueberschrift}</h2>
+      <p class="einleitung">{leistungen.einleitung}</p>
+      <ol class="schritte">
+        {leistungen.schritte.map((s) => (
+          <li>
+            <h3>{s.titel}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <Todo text={leistungen.todo} />
+      <Aufruf text={aufrufLeistungen.text} knopf={aufrufLeistungen.knopf} />
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--flaeche" id="einsatzgebiete">
+    <div class="rahmen">
+      <Beispiel aktiv={einsatzgebiete.beispiel} />
+      <h2>{einsatzgebiete.ueberschrift}</h2>
+      <p class="einleitung">{einsatzgebiete.einleitung}</p>
+      <ul class="gebiete">
+        {einsatzgebiete.eintraege.map((e) => (
+          <li>
+            <h3>{e.titel}</h3>
+            <p>{e.text}</p>
+          </li>
+        ))}
+      </ul>
+      <Todo text={einsatzgebiete.todo} />
+    </div>
+  </section>
+
+  <section class="abschnitt">
+    <div class="rahmen">
+      <div class="zweispaltig">
+        {haltung.punkte.map((p) => (
+          <div class="haltung">
+            <h3>{p.titel}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+      <Todo text={haltung.todo} />
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--flaeche" id="referenzen">
+    <div class="rahmen">
+      <h2>{referenzen.ueberschrift}</h2>
+      <p class="einleitung">{referenzen.einleitung}</p>
+      <div class="faelle">
+        {referenzen.eintraege.map((r) => (
+          <article class="fall">
+            <Beispiel aktiv={r.beispiel} />
+            <p class="fall-branche">{r.branche}</p>
+            <h3>{r.anlage}</h3>
+            <dl>
+              <dt>Aufgabe</dt>
+              <dd>{r.aufgabe}</dd>
+              <dt>Ergebnis</dt>
+              <dd>{r.ergebnis}</dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+      <Todo text={referenzen.todo} />
+      <Aufruf text={aufrufReferenzen.text} knopf={aufrufReferenzen.knopf} />
+    </div>
+  </section>
+
+  <section class="abschnitt" id="schnittstellen">
+    <div class="rahmen">
+      <Beispiel aktiv={schnittstellen.beispiel} />
+      <h2>{schnittstellen.ueberschrift}</h2>
+      <p class="einleitung">{schnittstellen.einleitung}</p>
+      <ul class="etiketten">
+        {schnittstellen.eintraege.map((s) => <li>{s}</li>)}
+      </ul>
+      <Todo text={schnittstellen.todo} />
+    </div>
+  </section>
+
+  <section class="abschnitt abschnitt--flaeche" id="ueber-uns">
+    <div class="rahmen">
+      <div class="ueber-uns">
+        <div class="person">
+          {ueberUns.person.foto
+            ? <img src={`${base}/${ueberUns.person.foto}`} alt={ueberUns.person.name} width="220" height="260" />
+            : <div class="foto-platz">Foto von dir</div>}
+        </div>
+        <div>
+          <h2>{ueberUns.ueberschrift}</h2>
+          <p class="leise">{ueberUns.text}</p>
+          <p><strong>{ueberUns.person.name}</strong>, {ueberUns.person.rolle}</p>
+          <Todo text={ueberUns.todo} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="abschnitt" id="kontakt">
+    <div class="rahmen">
+      <h2>{kontakt.ueberschrift}</h2>
+      <p class="einleitung">{kontakt.text}</p>
+      <div class="kontakt">
+        <div>
+          <Formular ziel={formular.ziel} knopf={formular.knopf} hinweis={formular.hinweis} />
+          <Todo text={formular.todo} />
+        </div>
+        <div class="direkt">
+          <h3>{kontakt.direktUeberschrift}</h3>
+          <a class="kontakt-gross" href={`tel:${firma.telefon}`}>{firma.telefonAnzeige}</a>
+          <a class="kontakt-gross" href={`mailto:${firma.email}`}>{firma.email}</a>
+          <address>
+            {firma.name}<br />
+            {firma.strasse}<br />
+            {firma.plz} {firma.ort}
+          </address>
+          <Todo text={kontakt.todo} />
+        </div>
+      </div>
+    </div>
+  </section>
+</Basis>

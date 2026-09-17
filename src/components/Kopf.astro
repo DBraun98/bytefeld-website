@@ -1,0 +1,62 @@
+---
+import kunde from '../data/kunde.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<header class="kopf">
+  <div class="rahmen leiste">
+    <a class="marke" href={`${base}/`}>
+      <img src={`${base}/${kunde.logo.datei}`} alt={`${kunde.firma.kurzname} – zur Startseite`} width="42" height="63" />
+    </a>
+    <nav aria-label="Hauptmenü">
+      <ul>
+        <li><a href={`${base}/#leistungen`}>Leistungen</a></li>
+        <li><a href={`${base}/#referenzen`}>Referenzen</a></li>
+        <li><a href={`${base}/#ueber-uns`}>Über uns</a></li>
+        <li><a href={`${base}/#kontakt`}>Kontakt</a></li>
+      </ul>
+    </nav>
+    <div class="aktionen">
+      <a class="telefon" href={`tel:${kunde.firma.telefon}`}>{kunde.firma.telefonAnzeige}</a>
+      <a class="knopf" href={`${base}/#kontakt`}>Anfrage senden</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .kopf {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--farbe-flaeche);
+    border-bottom: 1px solid var(--farbe-linie);
+  }
+  .leiste {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .6rem;
+  }
+  .marke img { display: block; height: 52px; width: auto; }
+  ul { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
+  nav a {
+    color: var(--farbe-text);
+    text-decoration: none;
+    font-weight: 600;
+    padding-block: .3rem;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { border-color: var(--farbe-akzent-hell); }
+  .aktionen { display: flex; align-items: center; gap: 1.25rem; }
+  .telefon { color: var(--farbe-text); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .telefon:hover { color: var(--farbe-akzent); }
+
+  @media (max-width: 1000px) {
+    nav { display: none; }
+  }
+  @media (max-width: 480px) {
+    .telefon { display: none; }
+    .marke img { height: 44px; }
+  }
+</style>

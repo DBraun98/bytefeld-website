@@ -1,0 +1,102 @@
+---
+/**
+ * Kontaktformular (Baukasten-Baustein)
+ * Versand später über ein PHP-Skript beim Hoster.
+ * Leeres `ziel` = Entwurf: Formular sichtbar, Absende-Knopf deaktiviert.
+ * Das Feld „website“ ist eine Spamfalle: Menschen sehen es nicht, Bots füllen es aus.
+ */
+interface Props {
+  ziel?: string;
+  knopf: string;
+  hinweis: string;
+}
+const { ziel = '', knopf, hinweis } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<form class="formular" method="post" action={ziel || undefined}>
+  <div class="reihe">
+    <div class="feld">
+      <label for="f-name">Name <span aria-hidden="true">*</span></label>
+      <input id="f-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="feld">
+      <label for="f-firma">Firma</label>
+      <input id="f-firma" name="firma" type="text" autocomplete="organization" />
+    </div>
+  </div>
+  <div class="reihe">
+    <div class="feld">
+      <label for="f-email">E-Mail <span aria-hidden="true">*</span></label>
+      <input id="f-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="feld">
+      <label for="f-telefon">Telefon</label>
+      <input id="f-telefon" name="telefon" type="tel" autocomplete="tel" />
+    </div>
+  </div>
+  <div class="feld">
+    <label for="f-nachricht">Ihre Nachricht <span aria-hidden="true">*</span></label>
+    <textarea id="f-nachricht" name="nachricht" rows="6" required></textarea>
+  </div>
+
+  <div class="falle" aria-hidden="true">
+    <label for="f-website">Bitte leer lassen</label>
+    <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <p class="klein">
+    Pflichtfelder sind mit * markiert. {hinweis}{' '}
+    Mehr dazu in der <a href={`${base}/datenschutz/`}>Datenschutzerklärung</a>.
+  </p>
+
+  <button class="knopf" type="submit" disabled={!ziel}>{knopf}</button>
+</form>
+
+<style>
+  .formular {
+    display: grid;
+    gap: 1.1rem;
+    padding: 1.75rem;
+    background: var(--farbe-flaeche);
+    border: 1px solid var(--farbe-linie);
+    border-radius: var(--radius);
+  }
+  .reihe { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .feld { display: grid; gap: .35rem; }
+  label { font-weight: 600; font-size: 1rem; }
+  input, textarea {
+    width: 100%;
+    padding: .7rem .8rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--farbe-text);
+    background: var(--farbe-grund);
+    border: 2px solid var(--farbe-linie);
+    border-radius: var(--radius);
+  }
+  textarea { resize: vertical; }
+  input:focus-visible, textarea:focus-visible {
+    outline: none;
+    border-color: var(--farbe-akzent);
+    background: #fff;
+  }
+  input:user-invalid, textarea:user-invalid { border-color: var(--farbe-signal); }
+
+  .falle {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .klein { margin: 0; font-size: .92rem; color: var(--farbe-leise); }
+
+  button { font: inherit; font-weight: 600; cursor: pointer; justify-self: start; }
+  button:disabled { cursor: not-allowed; opacity: .55; }
+
+  @media (max-width: 560px) {
+    .reihe { grid-template-columns: 1fr; }
+    .formular { padding: 1.25rem; }
+  }
+</style>

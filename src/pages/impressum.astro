@@ -1,0 +1,44 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Todo from '../components/Todo.astro';
+import kunde from '../data/kunde.json';
+
+const { firma, impressum } = kunde;
+---
+<Basis titel={`Impressum – ${firma.kurzname}`}>
+  <section class="abschnitt">
+    <div class="rahmen textseite">
+      <h1>Impressum</h1>
+      <Todo text={impressum.todo} />
+
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        {firma.name}<br />
+        {firma.strasse}<br />
+        {firma.plz} {firma.ort}
+      </p>
+      <p>Registergericht: {impressum.register}</p>
+
+      <h2>Persönlich haftende Gesellschafterin</h2>
+      <p>
+        {impressum.komplementaer.name}<br />
+        Sitz: {impressum.komplementaer.sitz}<br />
+        Registergericht: {impressum.komplementaer.register}<br />
+        Geschäftsführer: {firma.geschaeftsfuehrer}
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: <a href={`tel:${firma.telefon}`}>{firma.telefonAnzeige}</a><br />
+        E-Mail: <a href={`mailto:${firma.email}`}>{firma.email}</a>
+      </p>
+
+      {impressum.ustId && (
+        <>
+          <h2>Umsatzsteuer-ID</h2>
+          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: {impressum.ustId}</p>
+        </>
+      )}
+    </div>
+  </section>
+</Basis>

@@ -1,0 +1,170 @@
+{
+  "entwurf": true,
+  "firma": {
+    "name": "Bytefeld GmbH & Co. KG",
+    "kurzname": "Bytefeld",
+    "strasse": "Bettinghausen 1",
+    "plz": "27305",
+    "ort": "Bruchhausen-Vilsen",
+    "telefon": "+494253801186",
+    "telefonAnzeige": "04253 801186",
+    "email": "info@bytefeld.com",
+    "geschaeftsfuehrer": "Norbert Wagner"
+  },
+  "seo": {
+    "titel": "Bytefeld – Software für Lagersteuerung und Materialfluss",
+    "beschreibung": "Bytefeld entwickelt Software für automatisierte Lager: Analyse, Entwicklung, Inbetriebnahme und Betreuung aus einer Hand."
+  },
+  "logo": {
+    "datei": "logo.svg",
+    "todo": "Schickst du mir dein Logo als SVG-Datei? Das Logo hier habe ich nur nachgebaut."
+  },
+  "start": {
+    "ueberschrift": "Software für Lager, die nicht stillstehen.",
+    "text": "Bytefeld entwickelt Steuerungs- und Materialflusssysteme für automatisierte Lager. Von der ersten Analyse bis zum laufenden Betrieb.",
+    "knopfHaupt": "Anfrage senden",
+    "knopfNeben": "Leistungen ansehen",
+    "todo": ""
+  },
+  "roboter": {
+    "hinweis": "Klicken Sie auf den Roboter.",
+    "nachricht": "Hakt es in Ihrem Lager? Ich bringe Sie zum Kontakt.",
+    "linkText": "Zum Kontaktformular",
+    "todo": ""
+  },
+  "leistungen": {
+    "ueberschrift": "So begleiten wir Ihr Projekt",
+    "einleitung": "Wer die Software entwirft, bringt sie bei Ihnen auch zum Laufen und betreut sie danach.",
+    "schritte": [
+      {
+        "titel": "Systemanalyse",
+        "text": "Wir prüfen bestehende und geplante Systeme, finden Schwachstellen, schlagen Verbesserungen vor und dokumentieren, was bisher nirgends steht."
+      },
+      {
+        "titel": "Softwareentwicklung",
+        "text": "Software ist für uns Werkzeug, kein Selbstzweck. Wir bauen sie modular und nach bewährten Prinzipien, damit sie sich im Alltag selbstverständlich anfühlt."
+      },
+      {
+        "titel": "Inbetriebnahme",
+        "text": "Wir kommen zu Ihnen, installieren, binden an, testen und begleiten den Produktionsstart. Wir fahren erst, wenn alles läuft."
+      },
+      {
+        "titel": "Betrieb und Wartung",
+        "text": "Ausfallsicherheit planen wir von Anfang an ein. Danach bleiben wir Ihr Ansprechpartner für Updates und Störungen."
+      }
+    ],
+    "todo": "Die Texte habe ich von deiner alten Seite ins Deutsche übertragen. Passt das so, oder fehlt eine Leistung?"
+  },
+  "aufrufLeistungen": {
+    "text": "Sie planen ein neues Lager oder wollen ein bestehendes verbessern?",
+    "knopf": "Anfrage senden"
+  },
+  "einsatzgebiete": {
+    "ueberschrift": "Wo unsere Software arbeitet",
+    "einleitung": "Wir steuern neue Anlagen und übernehmen bestehende – auch wenn die alte Software kaum dokumentiert ist.",
+    "beispiel": true,
+    "eintraege": [
+      { "titel": "Automatische Kleinteilelager", "text": "Behälter werden vollautomatisch ein- und ausgelagert." },
+      { "titel": "Hochregallager", "text": "Palettenlager mit Regalbediengeräten, oft über viele Ebenen." },
+      { "titel": "Shuttle-Systeme", "text": "Kleine Fahrzeuge bewegen Behälter in den Regalgassen." },
+      { "titel": "Fördertechnik", "text": "Bänder und Rollen, die Behälter und Pakete durchs Lager bringen." },
+      { "titel": "Kommissionierung", "text": "Die Ware kommt zum Mitarbeiter, nicht umgekehrt." },
+      { "titel": "Fahrerlose Transportfahrzeuge", "text": "Roboter, die Waren selbstständig durch die Halle fahren." }
+    ],
+    "todo": "Das sind Beispiele von mir. Welche Lagerarten steuerst du wirklich? Streich, was nicht passt, und ergänze, was fehlt. Übernimmst du auch bestehende Anlagen?"
+  },
+  "haltung": {
+    "punkte": [
+      {
+        "titel": "Ihr Code gehört Ihnen.",
+        "text": "Sie bekommen den vollständigen Quellcode und eine freie Lizenz. Sie können jederzeit ohne uns weitermachen."
+      },
+      {
+        "titel": "Gebaut für den Dauerbetrieb.",
+        "text": "Ein Lager steht nicht still. Deshalb testen wir auch den Ernstfall, damit Ihr System Störungen abfängt, statt auszufallen."
+      }
+    ],
+    "todo": ""
+  },
+  "referenzen": {
+    "ueberschrift": "Aus unseren Projekten",
+    "einleitung": "Einige Beispiele aus der Praxis.",
+    "eintraege": [
+      {
+        "beispiel": true,
+        "branche": "Versandhandel",
+        "anlage": "Automatisches Kleinteilelager",
+        "aufgabe": "Die alte Lagersteuerung sollte ersetzt werden, ohne den Versand zu unterbrechen.",
+        "ergebnis": "Umstellung an einem Wochenende. Am Montag lief der Betrieb normal weiter."
+      },
+      {
+        "beispiel": true,
+        "branche": "Lebensmittelindustrie",
+        "anlage": "Tiefkühllager mit Fördertechnik",
+        "aufgabe": "Zu viele Staus im Materialfluss, besonders zu Schichtbeginn.",
+        "ergebnis": "Materialfluss neu geplant, deutlich mehr Durchsatz ohne Umbau der Anlage."
+      },
+      {
+        "beispiel": true,
+        "branche": "Maschinenbau",
+        "anlage": "Hochregallager",
+        "aufgabe": "Alte Steuerungssoftware, die niemand mehr kannte und die kaum dokumentiert war.",
+        "ergebnis": "Software analysiert und abgelöst. Der Kunde hat heute den vollständigen Quellcode."
+      }
+    ],
+    "todo": "Das sind ausgedachte Beispiele, damit du siehst, wie es aussehen kann. Welche echten Projekte darf ich zeigen? Mit Kundenname oder nur mit Branche? Gibt es Zahlen, die du nennen darfst?"
+  },
+  "aufrufReferenzen": {
+    "text": "Ihr Lager könnte das nächste Beispiel sein.",
+    "knopf": "Projekt anfragen"
+  },
+  "schnittstellen": {
+    "ueberschrift": "Passt zu Ihren Systemen",
+    "einleitung": "Unsere Software verbindet sich mit dem, was bei Ihnen schon läuft.",
+    "beispiel": true,
+    "eintraege": [
+      "Warenwirtschaft, z. B. SAP",
+      "Lagerverwaltung anderer Hersteller",
+      "Anlagensteuerungen",
+      "Scanner und Waagen",
+      "Etikettendrucker",
+      "Versanddienstleister"
+    ],
+    "todo": "Auch das sind Beispiele. An welche Systeme bindest du an? Darf ich Herstellernamen wie SAP nennen?"
+  },
+  "ueberUns": {
+    "ueberschrift": "Ein kleines Team, ein direkter Draht",
+    "text": "Bytefeld ist ein kleines Softwareunternehmen aus dem niedersächsischen Umland. Seit über 20 Jahren arbeiten wir an Lagersteuerung und Materialfluss. Bei uns sprechen Sie direkt mit dem, der Ihre Software baut.",
+    "person": {
+      "name": "Norbert Wagner",
+      "rolle": "Geschäftsführer",
+      "foto": ""
+    },
+    "todo": "Stimmen die „über 20 Jahre“ noch? Die Zahl stammt von deiner alten Seite aus 2017. Hast du ein Foto von dir für diesen Platz? Und magst du mir in drei Sätzen deinen Werdegang schicken?"
+  },
+  "kontakt": {
+    "ueberschrift": "Schreiben Sie uns",
+    "text": "Erzählen Sie kurz, worum es geht. Wir melden uns in der Regel innerhalb eines Werktags.",
+    "direktUeberschrift": "Lieber direkt?",
+    "todo": "Stimmt „innerhalb eines Werktags“ für dich?"
+  },
+  "formular": {
+    "ziel": "",
+    "knopf": "Anfrage senden",
+    "hinweis": "Ihre Angaben verwenden wir nur, um Ihre Anfrage zu beantworten.",
+    "todo": "Das Formular verschickt im Entwurf noch nichts. Sollen Anfragen an info@bytefeld.com gehen?"
+  },
+  "impressum": {
+    "register": "Amtsgericht Walsrode, HRA 203349",
+    "komplementaer": {
+      "name": "Bytefeld Verwaltungs GmbH",
+      "sitz": "Bruchhausen-Vilsen",
+      "register": "Amtsgericht Walsrode, HRB 206473"
+    },
+    "ustId": "",
+    "todo": "Die Angaben stammen von deiner alten Seite. Hast du eine Umsatzsteuer-ID? Die gehört mit rein. Rechtlich geprüft ist der Text nicht – schau bitte selbst drüber oder lass ihn prüfen."
+  },
+  "datenschutz": {
+    "todo": "Die vollständige Datenschutzerklärung schreibe ich, sobald feststeht, wo die Seite gehostet wird. Auch sie muss rechtlich geprüft werden."
+  }
+}

@@ -1,0 +1,25 @@
+---
+/** Gelber Kasten mit offener Frage an den Kunden. Leerer Text = kein Kasten. */
+interface Props {
+  text?: string;
+}
+const { text = '' } = Astro.props;
+---
+{text.trim() !== '' && (
+  <aside class="todo" role="note">
+    <strong>Frage von Dennis:</strong> {text}
+  </aside>
+)}
+
+<style>
+  .todo {
+    margin: 1.5rem 0;
+    padding: .9rem 1.1rem;
+    background: #FFF4B8;
+    border: 1px solid #E6C542;
+    border-radius: 4px;
+    color: #3D3200;
+    font-size: 1rem;
+    max-width: 44rem;
+  }
+</style>

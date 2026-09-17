@@ -1,0 +1,34 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Todo from '../components/Todo.astro';
+import kunde from '../data/kunde.json';
+
+const { firma, datenschutz } = kunde;
+---
+<Basis titel={`Datenschutz – ${firma.kurzname}`}>
+  <section class="abschnitt">
+    <div class="rahmen textseite">
+      <h1>Datenschutzerklärung</h1>
+      <Todo text={datenschutz.todo} />
+
+      <h2>Verantwortlich</h2>
+      <p>
+        {firma.name}<br />
+        {firma.strasse}, {firma.plz} {firma.ort}<br />
+        <a href={`mailto:${firma.email}`}>{firma.email}</a>
+      </p>
+
+      <h2>Kurz gesagt</h2>
+      <p>
+        Diese Website setzt keine Cookies, nutzt kein Tracking und lädt keine Inhalte
+        von fremden Servern. Schriften werden direkt von dieser Website ausgeliefert.
+      </p>
+
+      <h2>Kontaktformular</h2>
+      <p>
+        Wenn Sie uns über das Kontaktformular schreiben, verwenden wir Ihre Angaben
+        ausschließlich, um Ihre Anfrage zu bearbeiten.
+      </p>
+    </div>
+  </section>
+</Basis>

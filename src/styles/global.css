@@ -1,0 +1,246 @@
+/* ==========================================================================
+   KUNDENANPASSUNG – Farben und Schriften nur hier ändern
+   Schriften werden über @fontsource lokal mitgeliefert (siehe Basis.astro),
+   es wird nichts von fremden Servern geladen.
+   ========================================================================== */
+:root {
+  --farbe-grund: #F3F5F4;
+  --farbe-flaeche: #FFFFFF;
+  --farbe-text: #1E2427;
+  --farbe-leise: #56625C;
+  --farbe-linie: #D5DCD8;
+  --farbe-akzent: #0E8A3A;
+  --farbe-akzent-hell: #6CBF3F;
+  --farbe-signal: #E1001A;
+  --farbe-boden: #2B3338;
+
+  --schrift-text: "Barlow", "Segoe UI", Arial, sans-serif;
+  --schrift-titel: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+
+  --radius: 4px;
+  --breite: 72rem;
+}
+
+/* ==========================================================================
+   Grundgerüst (Baukasten – normalerweise nicht anfassen)
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--farbe-grund);
+  color: var(--farbe-text);
+  font-family: var(--schrift-text);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--schrift-titel);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 .6em;
+}
+h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 700; letter-spacing: -.01em; }
+h2 { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+h3 { font-size: 1.5rem; }
+p { margin: 0 0 1em; }
+
+a { color: var(--farbe-akzent); }
+a:focus-visible { outline: 3px solid var(--farbe-akzent-hell); outline-offset: 3px; }
+
+img { max-width: 100%; height: auto; }
+
+.rahmen {
+  max-width: var(--breite);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.abschnitt { padding-block: 5rem; }
+.abschnitt--flaeche {
+  background: var(--farbe-flaeche);
+  border-block: 1px solid var(--farbe-linie);
+}
+
+.leise { color: var(--farbe-leise); }
+.einleitung { color: var(--farbe-leise); max-width: 40rem; margin-bottom: 3rem; }
+
+.knopf {
+  display: inline-block;
+  padding: .75rem 1.3rem;
+  border-radius: var(--radius);
+  background: var(--farbe-akzent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--farbe-akzent);
+}
+.knopf:hover { background: #0B6F2F; border-color: #0B6F2F; }
+.knopf--rand { background: transparent; color: var(--farbe-text); border-color: var(--farbe-linie); }
+.knopf--rand:hover { background: var(--farbe-flaeche); border-color: var(--farbe-text); }
+
+.knopfreihe { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ==========================================================================
+   Startseite
+   ========================================================================== */
+.start { padding-block: 5rem 1rem; }
+.start h1 { max-width: 14ch; }
+.start p { max-width: 36rem; font-size: 1.25rem; color: var(--farbe-leise); margin-bottom: 2rem; }
+
+.schritte {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  counter-reset: schritt;
+}
+.schritte li {
+  counter-increment: schritt;
+  position: relative;
+  padding: 2.75rem 1.75rem 0 0;
+  border-top: 3px dashed var(--farbe-linie);
+}
+.schritte li::before {
+  content: counter(schritt);
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  width: 2.3rem;
+  height: 2.3rem;
+  display: grid;
+  place-items: center;
+  background: var(--farbe-akzent);
+  color: #fff;
+  font-family: var(--schrift-titel);
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: var(--radius);
+}
+.schritte p { color: var(--farbe-leise); margin: 0; }
+
+.zweispaltig { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 4rem; }
+.zweispaltig p { color: var(--farbe-leise); }
+
+.person img, .foto-platz {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 11 / 13;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.foto-platz {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: .5rem;
+  color: var(--farbe-leise);
+  border: 2px dashed var(--farbe-linie);
+}
+.ueber-uns { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: center; }
+.ueber-uns p { max-width: 40rem; }
+
+.kontakt-gross {
+  display: block;
+  font-family: var(--schrift-titel);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--farbe-text);
+  text-decoration: none;
+}
+.kontakt-gross:hover { color: var(--farbe-akzent); }
+address { font-style: normal; color: var(--farbe-leise); margin-top: 1.5rem; }
+
+/* Sprungziele nicht unter der festen Kopfzeile verstecken */
+[id] { scroll-margin-top: 90px; }
+
+/* Einsatzgebiete */
+.gebiete {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.25rem 2.5rem;
+}
+.gebiete li {
+  padding-top: 1rem;
+  border-top: 3px solid var(--farbe-akzent-hell);
+}
+.gebiete h3 { font-size: 1.35rem; margin-bottom: .35rem; }
+.gebiete p { margin: 0; color: var(--farbe-leise); }
+
+/* Haltung */
+.haltung {
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--farbe-akzent);
+}
+
+/* Referenzen */
+.faelle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.fall {
+  padding: 1.5rem;
+  background: var(--farbe-grund);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--farbe-akzent);
+}
+.fall-branche { margin: 0 0 .25rem; font-weight: 600; color: var(--farbe-akzent); }
+.fall h3 { font-size: 1.45rem; }
+.fall dl { margin: 0; }
+.fall dt { font-weight: 600; margin-top: .8rem; }
+.fall dd { margin: .15rem 0 0; color: var(--farbe-leise); }
+
+/* Schnittstellen */
+.etiketten {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+.etiketten li {
+  padding: .55rem 1rem;
+  background: var(--farbe-flaeche);
+  border: 2px solid var(--farbe-text);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+/* Kontakt */
+.kontakt { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: start; }
+.direkt {
+  padding: 1.75rem;
+  background: var(--farbe-boden);
+  color: #fff;
+  border-radius: var(--radius);
+}
+.direkt .kontakt-gross { color: #fff; font-size: clamp(1.6rem, 2.6vw, 2.1rem); overflow-wrap: anywhere; }
+.direkt .kontakt-gross:hover { color: var(--farbe-akzent-hell); }
+.direkt address { color: #C9D2CD; }
+
+/* Unterseiten (Impressum, Datenschutz) */
+.textseite { max-width: 44rem; }
+.textseite h2 { font-size: 1.6rem; margin-top: 2rem; }
+
+@media (max-width: 900px) {
+  .schritte { grid-template-columns: 1fr 1fr; row-gap: 3rem; }
+  .zweispaltig, .kontakt, .ueber-uns { grid-template-columns: 1fr; }
+  .gebiete { grid-template-columns: 1fr 1fr; }
+  .faelle { grid-template-columns: 1fr; }
+  .person img, .foto-platz { max-width: 200px; }
+}
+@media (max-width: 560px) {
+  .schritte, .gebiete { grid-template-columns: 1fr; }
+  .start { padding-top: 3rem; }
+  .abschnitt { padding-block: 3.5rem; }
+}

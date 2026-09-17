@@ -1,0 +1,40 @@
+---
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '../styles/global.css';
+
+import kunde from '../data/kunde.json';
+import Kopf from '../components/Kopf.astro';
+import Fuss from '../components/Fuss.astro';
+import Todo from '../components/Todo.astro';
+
+interface Props {
+  titel?: string;
+  beschreibung?: string;
+}
+const { titel = kunde.seo.titel, beschreibung = kunde.seo.beschreibung } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titel}</title>
+    <meta name="description" content={beschreibung} />
+    {kunde.entwurf && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+  </head>
+  <body>
+    <Kopf />
+    <main>
+      {kunde.logo.todo && (
+        <div class="rahmen"><Todo text={kunde.logo.todo} /></div>
+      )}
+      <slot />
+    </main>
+    <Fuss />
+  </body>
+</html>

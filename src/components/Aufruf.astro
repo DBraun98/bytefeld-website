@@ -1,0 +1,37 @@
+---
+/** Kurzer Handlungsaufruf zwischen zwei Abschnitten: Text + Knopf. */
+interface Props {
+  text: string;
+  knopf: string;
+  ziel?: string;
+}
+const { text, knopf, ziel = '#kontakt' } = Astro.props;
+---
+<div class="aufruf">
+  <p>{text}</p>
+  <a class="knopf" href={ziel}>{knopf}</a>
+</div>
+
+<style>
+  .aufruf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: 3.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--farbe-boden);
+    color: #fff;
+    border-radius: var(--radius);
+  }
+  p {
+    margin: 0;
+    font-family: var(--schrift-titel);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .aufruf .knopf { background: var(--farbe-akzent-hell); border-color: var(--farbe-akzent-hell); color: #102016; }
+  .aufruf .knopf:hover { background: #82D256; border-color: #82D256; }
+</style>

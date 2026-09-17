@@ -1,0 +1,22 @@
+---
+/** Kennzeichnung für Platzhalter-Inhalte im Entwurf. */
+interface Props {
+  aktiv?: boolean;
+}
+const { aktiv = false } = Astro.props;
+---
+{aktiv && <span class="beispiel">Beispiel</span>}
+
+<style>
+  .beispiel {
+    display: inline-block;
+    margin-bottom: .6rem;
+    padding: .1rem .5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: #6B5500;
+    background: #FFF4B8;
+    border: 1px dashed #C9A400;
+    border-radius: 3px;
+  }
+</style>

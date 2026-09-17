@@ -1,0 +1,283 @@
+---
+/**
+ * Roboter-Szene (Baukasten-Baustein)
+ * Ein Transportroboter fährt über den Hallenboden, hält am mittleren Regal,
+ * hebt kurz seine Kiste an und fährt weiter. Reines CSS und HTML, kein JavaScript.
+ *
+ * Interaktion: Maus darüber oder Tastatur-Fokus = Roboter hält an.
+ * Klick = Roboter bleibt stehen und zeigt eine Sprechblase mit Link.
+ * Erneuter Klick = Sprechblase zu, Roboter fährt weiter.
+ * Bei „Bewegung reduzieren“ im Betriebssystem steht der Roboter still.
+ *
+ * Props:
+ *   dauer     – Länge einer Runde, z. B. "18s"
+ *   hinweis   – kleiner Text auf dem Boden, z. B. „Klicken Sie auf den Roboter.“
+ *   nachricht – Text in der Sprechblase (leer = Roboter nicht klickbar)
+ *   linkText  – Beschriftung des Knopfs in der Sprechblase
+ *   linkZiel  – Ziel des Knopfs, z. B. "#kontakt"
+ */
+interface Props {
+  dauer?: string;
+  hinweis?: string;
+  nachricht?: string;
+  linkText?: string;
+  linkZiel?: string;
+}
+const {
+  dauer = '18s',
+  hinweis = '',
+  nachricht = '',
+  linkText = '',
+  linkZiel = '#kontakt',
+} = Astro.props;
+---
+<div class="szene" style={`--dauer: ${dauer};`}>
+  <div class="kulisse" aria-hidden="true">
+    {[1, 2, 3].map((n) => (
+      <svg class={`regal regal-${n}`} viewBox="0 0 120 170" preserveAspectRatio="xMidYMax meet">
+        <rect x="4" y="0" width="6" height="170" fill="#8A969C" />
+        <rect x="110" y="0" width="6" height="170" fill="#8A969C" />
+        <rect x="4" y="40" width="112" height="4" fill="#8A969C" />
+        <rect x="4" y="84" width="112" height="4" fill="#8A969C" />
+        <rect x="4" y="128" width="112" height="4" fill="#8A969C" />
+        <rect x="16" y="12" width="40" height="28" rx="2" fill="#6CBF3F" />
+        <rect x="62" y="18" width="40" height="22" rx="2" fill="#C7D0CB" />
+        <rect x="16" y="60" width="40" height="24" rx="2" fill={n === 2 ? 'none' : '#0E8A3A'} stroke={n === 2 ? '#8A969C' : 'none'} stroke-dasharray="4 3" />
+        <rect x="62" y="56" width="40" height="28" rx="2" fill="#6CBF3F" />
+        <rect x="16" y="102" width="40" height="26" rx="2" fill="#C7D0CB" />
+        <rect x="62" y="100" width="40" height="28" rx="2" fill="#0E8A3A" />
+      </svg>
+    ))}
+    <div class="boden"></div>
+  </div>
+
+  {hinweis && nachricht && <p class="hinweis">{hinweis}</p>}
+
+  <div class="roboter">
+    <details class="klick">
+      <summary>
+        <span class="unsichtbar">Roboter anhalten und Nachricht anzeigen</span>
+        <svg viewBox="0 0 150 112" width="100%" height="100%" aria-hidden="true">
+          <g class="kiste">
+            <rect x="35" y="4" width="80" height="44" rx="3" fill="#6CBF3F" />
+            <rect x="35" y="22" width="80" height="4" fill="#4E9A2B" />
+            <rect x="44" y="10" width="7" height="7" fill="#E1001A" />
+            <rect x="54" y="10" width="7" height="7" fill="#0E8A3A" />
+            <rect x="64" y="10" width="7" height="7" fill="#F3F5F4" />
+          </g>
+          <rect x="63" y="46" width="24" height="14" fill="#8A969C" />
+          <rect x="8" y="56" width="134" height="36" rx="10" fill="#1E2427" />
+          <rect x="8" y="74" width="134" height="5" fill="#0E8A3A" />
+          <circle class="lampe" cx="22" cy="64" r="3.5" fill="#E1001A" />
+          <rect x="110" y="61" width="26" height="11" rx="5.5" fill="#0B3B1B" />
+          <g class="augen">
+            <circle cx="118" cy="66.5" r="2.6" fill="#6CBF3F" />
+            <circle cx="128" cy="66.5" r="2.6" fill="#6CBF3F" />
+          </g>
+          <g class="rad">
+            <circle cx="34" cy="96" r="13" fill="#111618" />
+            <circle cx="34" cy="96" r="5" fill="#8A969C" />
+            <rect x="32.5" y="85" width="3" height="22" fill="#5E6A70" />
+          </g>
+          <g class="rad">
+            <circle cx="116" cy="96" r="13" fill="#111618" />
+            <circle cx="116" cy="96" r="5" fill="#8A969C" />
+            <rect x="114.5" y="85" width="3" height="22" fill="#5E6A70" />
+          </g>
+        </svg>
+      </summary>
+      {nachricht && (
+        <div class="blase">
+          <p>{nachricht}</p>
+          {linkText && <a class="blase-knopf" href={linkZiel}>{linkText}</a>}
+        </div>
+      )}
+    </details>
+  </div>
+</div>
+
+<style>
+  .szene {
+    --rob: 150px;
+    --regal: clamp(84px, 13vw, 124px);
+    --bodenhoehe: 64px;
+    --halt: calc(50cqw - var(--rob) / 2);
+    container-type: inline-size;
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .regal {
+    position: absolute;
+    bottom: calc(var(--bodenhoehe) - 2px);
+    width: var(--regal);
+    height: calc(var(--regal) * 170 / 120);
+    transform: translateX(-50%);
+  }
+  .regal-1 { left: 16%; }
+  .regal-2 { left: 50%; }
+  .regal-3 { left: 84%; }
+
+  .boden {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: var(--bodenhoehe);
+    background-color: var(--farbe-boden, #2B3338);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, .55) 0 28px,
+      transparent 28px 56px
+    );
+    background-size: 100% 3px;
+    background-position: 0 38%;
+    background-repeat: no-repeat;
+  }
+
+  .hinweis {
+    position: absolute;
+    right: 1.5rem;
+    bottom: .35rem;
+    margin: 0;
+    font-size: .85rem;
+    color: #C9D2CD;
+  }
+
+  .roboter {
+    position: absolute;
+    left: 0;
+    bottom: 14px;
+    width: var(--rob);
+    height: calc(var(--rob) * 112 / 150);
+    animation: fahrt var(--dauer) ease-in-out infinite;
+    will-change: transform;
+    z-index: 1;
+  }
+
+  .klick,
+  summary {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    border-radius: 12px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible {
+    outline: 3px solid var(--farbe-akzent-hell, #6CBF3F);
+    outline-offset: 4px;
+  }
+  summary svg { display: block; }
+
+  .unsichtbar {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Sprechblase fährt mit dem Roboter mit */
+  .blase {
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    padding: .9rem 1rem 1rem;
+    background: #fff;
+    color: var(--farbe-text, #1E2427);
+    border: 2px solid var(--farbe-text, #1E2427);
+    border-radius: 12px;
+    font-size: 1rem;
+    line-height: 1.4;
+    text-align: left;
+  }
+  .blase::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-right: 2px solid var(--farbe-text, #1E2427);
+    border-bottom: 2px solid var(--farbe-text, #1E2427);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .blase p { margin: 0 0 .75rem; font-weight: 600; }
+  .blase-knopf {
+    display: inline-block;
+    padding: .5rem .9rem;
+    border-radius: 4px;
+    background: var(--farbe-akzent, #0E8A3A);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .blase-knopf:hover { background: #0B6F2F; }
+  .blase-knopf:focus-visible {
+    outline: 3px solid var(--farbe-akzent-hell, #6CBF3F);
+    outline-offset: 2px;
+  }
+
+  /* Animationen */
+  .rad {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: drehen var(--dauer) ease-in-out infinite;
+  }
+  .kiste { animation: heben var(--dauer) ease-in-out infinite; }
+  .augen {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: blinzeln 4.5s infinite;
+  }
+  .lampe { animation: blinken 1.2s steps(1) infinite; }
+
+  /* Anhalten: Maus darüber, Tastatur-Fokus oder Sprechblase offen */
+  .szene:has(summary:hover, summary:focus-visible, .klick[open]) :is(.roboter, .rad, .kiste) {
+    animation-play-state: paused;
+  }
+
+  @keyframes fahrt {
+    0%   { transform: translateX(calc(-1 * var(--rob) - 20px)); }
+    38%  { transform: translateX(var(--halt)); }
+    60%  { transform: translateX(var(--halt)); }
+    100% { transform: translateX(calc(100cqw + 20px)); }
+  }
+  @keyframes drehen {
+    0%   { transform: rotate(0deg); }
+    38%  { transform: rotate(1080deg); }
+    60%  { transform: rotate(1080deg); }
+    100% { transform: rotate(2520deg); }
+  }
+  @keyframes heben {
+    0%, 42%   { transform: translateY(0); }
+    46%, 54%  { transform: translateY(-14px); }
+    58%, 100% { transform: translateY(0); }
+  }
+  @keyframes blinzeln {
+    0%, 93%, 100% { transform: scaleY(1); }
+    96%           { transform: scaleY(.15); }
+  }
+  @keyframes blinken {
+    0%  { opacity: 1; }
+    50% { opacity: .25; }
+  }
+
+  @media (max-width: 560px) {
+    .szene { --rob: 110px; height: 280px; }
+    .blase { width: 210px; font-size: .95rem; }
+    .hinweis { right: auto; left: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .roboter, .rad, .kiste, .augen, .lampe { animation: none; }
+    .roboter { transform: translateX(var(--halt)); }
+  }
+</style>
